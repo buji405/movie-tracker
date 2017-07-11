@@ -5,3 +5,13 @@
 #main {
   text-align: center;
 }
+
+.nav-bar {
+  background: lightgrey;
+  height: 60px;
+}
+
+.movies-container {
+  background: yellow;
+  height: 200px;
+}
