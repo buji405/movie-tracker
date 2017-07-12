@@ -1,15 +1,47 @@
 import React, { Component } from 'react'
 import MovieCard from '../MovieCard/MovieCard'
 import { connect } from 'react-redux';
-import itemsFetchData from '../actions/items';
+import { itemsFetchData } from '../../actions/index';
+import { key } from '../../key.js'
 
-class MovieCardList extends Component= () => {
+class MovieCardList extends Component {
 
   componentDidMount() {
-    this.props.fetchData('https://api.themoviedb.org/3/movie/upcoming?api_key=0e3c9029a31b863e50b0926e97bc9454&language=en-US&page=1')
+    this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
   }
 
-  export default const mapStateToProps = (state) => {
+  render() {
+    let cards;
+    console.log(this.props.items);
+
+    if (this.props.hasErrored) {
+      return <p>Sorry Asshole</p>
+    }
+
+    if (this.props.isLoading) {
+      return <p>Loading...</p>
+    }
+    if (this.props.items.results) {
+      console.log('hello');
+      cards = this.props.items.results.map((result, index) => {
+        console.log(result.title);
+        return (
+          <MovieCard title={result.title}
+                   releaseDate={result.release_date}
+                   key={index}/>
+        )
+      })
+    }
+    return (
+      <section className="movies-container">
+        {cards}
+      </section>
+    )
+  }
+}
+
+
+const mapStateToProps = (state) => {
     return {
       items: state.items,
       hasErrored: state.itemsHasErrored,
@@ -22,23 +54,7 @@ class MovieCardList extends Component= () => {
       fetchData: (url) => dispatch(itemsFetchData(url))
     };
   };
-  render() {
-    console.log(this.props.items);
-    if (this.props.hasErrored) {
-      return <p>Sorry Asshole</p>
-    }
 
-    if (this.props.isLoading) {
-      return <p>Loading...</p>
-    }
-    return (
-      <section className="movies-container">
-        <MovieCard />
-      </section>
-    )
-  }
-}
-
-// export default connect(mapStateToProps, mapDispatchToProps)(MovieCardList);
-// 
+export default connect(mapStateToProps, mapDispatchToProps)(MovieCardList);
+//
 // export default MovieCardList

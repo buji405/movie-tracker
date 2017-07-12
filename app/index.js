@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app';
 import MovieIndex from './components/movieIndex';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 
 import createHistory from 'history/createBrowserHistory';
@@ -14,11 +14,16 @@ import rootReducer from './reducers';
 
 import ReduxThunk from 'redux-thunk'
 
+// const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
 function configureStore(initialState) {
     return createStore(
         rootReducer,
         initialState,
-        applyMiddleware(thunk)
+        compose(
+          applyMiddleware(thunk),
+          window.devToolsExtension ? window.devToolsExtension() : f => f
+        )
     );
 }
 
@@ -26,7 +31,6 @@ const history = createHistory();
 
 const middleware = routerMiddleware(history);
 
-const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
 const store = configureStore()
 
