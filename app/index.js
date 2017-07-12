@@ -21,7 +21,7 @@ const store = configureStore()
 
 // const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-// TODO: figure out how to get router: routerReducer into this
+// TODO: figure out how to get router: router
 
 function configureStore(initialState) {
   return createStore(

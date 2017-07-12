@@ -1,5 +1,3 @@
-import { key } from '../key.js'
-
 // export const fetchMovies = () => {
 //   //api call
 //   return {
@@ -9,28 +7,28 @@ import { key } from '../key.js'
 // }
 
 
-export function itemsHasErrored(bool) {
+export const itemsHasErrored = (bool) => {
   return {
     type: 'ITEMS_HAS_ERRORED',
     hasErrored: bool
   };
 }
 
-export function itemsIsLoading(bool) {
+export const itemsIsLoading = (bool) => {
   return {
     type: 'ITEMS_IS_LOADING',
     isLoading: bool
   };
 }
 
-export function itemsFetchDataSuccess(items) {
+export const itemsFetchDataSuccess = (items) => {
   return {
     type: 'ITEMS_FETCH_DATA_SUCCESS',
     items
   };
 }
 
-export function itemsFetchData(url) {
+export const itemsFetchData = (url) => {
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
 
