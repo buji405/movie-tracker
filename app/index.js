@@ -9,31 +9,30 @@ import createHistory from 'history/createBrowserHistory';
 
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
 
-import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 
-import ReduxThunk from 'redux-thunk'
-
-// const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
-
-function configureStore(initialState) {
-    return createStore(
-        rootReducer,
-        initialState,
-        compose(
-          applyMiddleware(thunk),
-          window.devToolsExtension ? window.devToolsExtension() : f => f
-        )
-    );
-}
+import ReduxThunk from 'redux-thunk';
 
 const history = createHistory();
 
 const middleware = routerMiddleware(history);
 
-
 const store = configureStore()
 
+// const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+// TODO: figure out how to get router: routerReducer into this
+
+function configureStore(initialState) {
+  return createStore(
+    rootReducer,
+    initialState,
+    compose(
+      applyMiddleware(ReduxThunk, middleware),
+      window.devToolsExtension ? window.devToolsExtension() : f => f
+    )
+  );
+}
 // const store = createStore(combineReducers({
 //   router: routerReducer
 // }),

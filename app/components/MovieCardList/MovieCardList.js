@@ -12,7 +12,7 @@ class MovieCardList extends Component {
 
   render() {
     let cards;
-    console.log(this.props.items);
+    // console.log(this.props.items);
 
     if (this.props.hasErrored) {
       return <p>Sorry Asshole</p>
@@ -21,10 +21,9 @@ class MovieCardList extends Component {
     if (this.props.isLoading) {
       return <p>Loading...</p>
     }
+
     if (this.props.items.results) {
-      console.log('hello');
       cards = this.props.items.results.map((result, index) => {
-        console.log(result.title);
         return (
           <MovieCard title={result.title}
                    releaseDate={result.release_date}
