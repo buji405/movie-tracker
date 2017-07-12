@@ -1,9 +1,10 @@
 import React from 'react'
 
-const MovieCard = () => {
+const MovieCard = ({title, releaseDate}) => {
   return (
     <section className="movie-card">
-      Movie!
+      <p>{title}</p>
+      <p>{releaseDate}</p>
     </section>
   )
 }

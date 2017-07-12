@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
-import { fetchMovies } from './movie-reducer'
+import { items, itemsHasErrored, itemsIsLoading } from './items'
+import { routerReducer } from 'react-router-redux'
 
 const rootReducer = combineReducers({
-  fetchMovies
+  items,
+  itemsHasErrored,
+  itemsIsLoading,
+  router: routerReducer
 })
 
 
