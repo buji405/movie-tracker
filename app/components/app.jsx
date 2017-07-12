@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Header from './Header/Header'
-import MovieCardList from './MovieCardList/MovieCardList'
+// import MovieCardList from './MovieCardList/MovieCardList'
 
 export default class App extends Component {
   constructor() {
@@ -11,7 +11,7 @@ export default class App extends Component {
     return (
       <div>
         <Header />
-        <MovieCardList />
+        
       </div>
     )
   }
