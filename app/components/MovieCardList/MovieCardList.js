@@ -12,7 +12,7 @@ class MovieCardList extends Component {
 
   render() {
     let cards;
-    // console.log(this.props.items);
+    console.log(this.props.items);
 
     if (this.props.hasErrored) {
       return <p>Sorry Asshole</p>
@@ -25,9 +25,8 @@ class MovieCardList extends Component {
     if (this.props.items.results) {
       cards = this.props.items.results.map((result, index) => {
         return (
-          <MovieCard title={result.title}
-                   releaseDate={result.release_date}
-                   key={index}/>
+          <MovieCard poster={result.poster_path}
+                     key={index}/>
         )
       })
     }
@@ -39,21 +38,4 @@ class MovieCardList extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
-    return {
-      items: state.items,
-      hasErrored: state.itemsHasErrored,
-      isLoading: state.itemsIsLoading
-    };
-  }
-
-  const mapDispatchToProps = (dispatch) => {
-    return {
-      fetchData: (url) => dispatch(itemsFetchData(url))
-    };
-  };
-
-export default connect(mapStateToProps, mapDispatchToProps)(MovieCardList);
-//
-// export default MovieCardList
+export default MovieCardList

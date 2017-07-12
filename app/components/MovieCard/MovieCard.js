@@ -1,10 +1,9 @@
 import React from 'react'
 
-const MovieCard = ({title, releaseDate}) => {
+const MovieCard = ({poster}) => {
   return (
     <section className="movie-card">
-      <p>{title}</p>
-      <p>{releaseDate}</p>
+    <img src={`https://image.tmdb.org/t/p/w300${poster}`}/>
     </section>
   )
 }
