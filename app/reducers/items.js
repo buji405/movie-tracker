@@ -28,8 +28,19 @@ export function items(state = [], action) {
 export function users(state = [], action) {
   switch (action.type) {
     case 'USERS_FETCH_DATA_SUCCESS':
-      return action.user;
+      return action.user
+    case 'USER_LOGIN':
+      console.log('in the reducer login', state.data, action.email, action.password)
+      return state.data.filter(e => (e.email === action.email && e.password === action.password))
     default:
       return state;
+  }
+}
+
+export function loginUser(state = [], action) {
+  switch (action.type) {
+
+    default:
+      return state
   }
 }

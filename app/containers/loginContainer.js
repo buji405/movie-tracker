@@ -1,18 +1,17 @@
 import { connect } from 'react-redux';
 import Login from '../components/Login/Login';
-import { userLogin } from '../actions';
+import { userLogin, usersFetchData } from '../actions';
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    handleSubmit: (email, password) => {
-      dispatch(userLogin(email, password))
-    }
+    fetchUserData: (url, email, password) => dispatch(usersFetchData(url, email, password)),
+    loginUser: (email, password) => dispatch(userLogin(email, password))
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    favorites: state.favorites
+    state
   }
 }
 

@@ -13,8 +13,7 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      fetchData: (url) => dispatch(itemsFetchData(url)),
-      fetchUserData: (url) => dispatch(usersFetchData(url))
+      fetchData: (url) => dispatch(itemsFetchData(url))
     };
   };
 
