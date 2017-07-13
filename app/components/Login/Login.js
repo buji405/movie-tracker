@@ -31,7 +31,9 @@ export default class Login extends Component {
 
   addNewUserBtn (e) {
     e.preventDefault()
+    const { emailInput, passwordInput, name } = this.state;
     console.log('add new user');
+    this.props.fetchNewUser('api/users/new', emailInput, passwordInput, name)
   }
 
   render() {

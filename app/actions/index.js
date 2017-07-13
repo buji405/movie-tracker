@@ -94,3 +94,34 @@ export const usersFetchData = (url, email, password) => {
       })
   }
 }
+
+export const addUser = (url, email, password, name) => {
+  return (dispatch) => {
+    dispatch(itemsIsLoading(true));
+
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({email, password, name}),
+      headers: {'Content-Type': 'application/json'}
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
+
+        dispatch(itemsIsLoading(false))
+
+        return response
+      })
+      .then((response) => response.json())
+      .then((users) => {
+        console.log(users);
+         dispatch(usersFetchDataSuccess(users))
+
+      })
+      .catch((error) => {
+        dispatch(itemsHasErrored(true))
+        console.log(error, 'error fetching data')
+      })
+  }
+}
