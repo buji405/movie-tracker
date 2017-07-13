@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import MovieCard from '../MovieCard/MovieCard'
-import { connect } from 'react-redux';
-import { itemsFetchData } from '../../actions/index';
+import { itemsFetchData } from '../../actions';
 import { key } from '../../key.js'
 
 class MovieCardList extends Component {

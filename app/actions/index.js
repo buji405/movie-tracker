@@ -35,6 +35,12 @@ export const userLogin = (email, password) => {
   };
 }
 
+export const deleteUser = () => {
+  return {
+    type: 'DELETE_USER'
+  }
+}
+
 export const itemsFetchData = (url) => {
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
@@ -59,11 +65,14 @@ export const itemsFetchData = (url) => {
 }
 
 export const usersFetchData = (url, email, password) => {
-  console.log('in user fetch', email, password);
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
 
-    fetch(url)
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({email, password}),
+      headers: {'Content-Type': 'application/json'}
+    })
       .then((response) => {
         if (!response.ok) {
           throw Error(response.statusText)
@@ -74,8 +83,11 @@ export const usersFetchData = (url, email, password) => {
         return response
       })
       .then((response) => response.json())
-      .then((users) => dispatch(usersFetchDataSuccess(users)))
-      .then((users) => dispatch(userLogin(email, password)))
+      .then((users) => {
+        console.log(users);
+         dispatch(usersFetchDataSuccess(users))
+
+      })
       .catch((error) => {
         dispatch(itemsHasErrored(true))
         console.log(error, 'error fetching data')

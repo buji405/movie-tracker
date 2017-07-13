@@ -12,10 +12,9 @@ export default class Login extends Component {
   }
 
   submitUser(e) {
-    console.log(this.props);
     // console.log('submit user login compt',this.state.emailInput, this.state.passwordInput);
     e.preventDefault()
-    this.props.fetchUserData('/api/users/', this.state.emailInput, this.state.passwordInput)
+    this.props.fetchUserData('/api/users/', this.state.emailInput.toLowerCase(), this.state.passwordInput)
     // this.props.loginUser(this.state.emailInput, this.state.passwordInput)
     this.setState({
       emailInput: '',

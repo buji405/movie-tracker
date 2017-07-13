@@ -25,28 +25,32 @@ export function items(state = [], action) {
   }
 }
 
-export function users(state = [], action) {
+export function users(state = {}, action) {
   switch (action.type) {
     case 'USERS_FETCH_DATA_SUCCESS':
       return action.user
     case 'USER_LOGIN':
-      console.log('in the reducer login', state.data, action.email, action.password)
-      const newState = state.data.filter(e => (e.email === action.email && e.password === action.password))
+      return  state
+    case 'DELETE_USER':
+      
+      return Object.assign({})
 
-      if (newState.length === 0) {
-        console.log('empty state asshole!');
-      }
-      return newState
+    //   console.log('in the reducer login', state.data, action.email, action.password)
+    //   const newState = state.data.filter(e => (e.email === action.email && e.password === action.password))
 
-    default:
-      return state;
-  }
-}
-
-export function loginUser(state = [], action) {
-  switch (action.type) {
-
+      // if (newState.length === 0) {
+      //   console.log('empty state asshole!');
+      // }
+      // return newState
     default:
       return state
   }
 }
+
+// export function loginUser(state = [], action) {
+//   switch (action.type) {
+//
+//     default:
+//       return state
+//   }
+// }
