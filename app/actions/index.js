@@ -27,6 +27,7 @@ export const usersFetchDataSuccess = (user) => {
 }
 
 export const userLogin = (email, password) => {
+  console.log('in userLogin action', email, password);
   return {
     type: 'USER_LOGIN',
     email,
@@ -58,6 +59,7 @@ export const itemsFetchData = (url) => {
 }
 
 export const usersFetchData = (url, email, password) => {
+  console.log('in user fetch', email, password);
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
 
@@ -73,6 +75,7 @@ export const usersFetchData = (url, email, password) => {
       })
       .then((response) => response.json())
       .then((users) => dispatch(usersFetchDataSuccess(users)))
+      .then((users) => dispatch(userLogin(email, password)))
       .catch((error) => {
         dispatch(itemsHasErrored(true))
         console.log(error, 'error fetching data')
