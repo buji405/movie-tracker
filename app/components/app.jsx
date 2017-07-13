@@ -16,7 +16,7 @@ export default class App extends Component {
         <div>
           <Header/>
           <Route path='/login' component={loginContainer} />
-          <MovieCardListContainer />
+          <Route exact path='/'component={MovieCardListContainer} />
         </div>
       </Router>
     )

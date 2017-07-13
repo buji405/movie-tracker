@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Login from '../components/Login/Login';
+import Header from '../components/Header/Header';
 import { userLogin, usersFetchData } from '../actions';
 
 const mapDispatchToProps = (dispatch) => {
@@ -14,4 +14,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

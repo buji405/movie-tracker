@@ -31,3 +31,7 @@ form {
   padding: 1%;
   display: inline-block;
 }
+
+.login-form {
+  background-color: #fff;
+}
