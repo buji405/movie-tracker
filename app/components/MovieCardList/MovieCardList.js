@@ -8,7 +8,7 @@ class MovieCardList extends Component {
 
   componentDidMount() {
     this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
-    
+
   }
 
   render() {
@@ -17,6 +17,8 @@ class MovieCardList extends Component {
     if (this.props.hasErrored) {
       return <p>Sorry Asshole</p>
     }
+
+    //if this.props.invalidLogin, render you have entered the wrong credentials message.
 
     if (this.props.isLoading) {
       return <p>Loading...</p>

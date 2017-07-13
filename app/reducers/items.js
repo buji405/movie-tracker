@@ -31,7 +31,13 @@ export function users(state = [], action) {
       return action.user
     case 'USER_LOGIN':
       console.log('in the reducer login', state.data, action.email, action.password)
-      return state.data.filter(e => (e.email === action.email && e.password === action.password))
+      const newState = state.data.filter(e => (e.email === action.email && e.password === action.password))
+
+      if (newState.length === 0) {
+        console.log('empty state asshole!');
+      }
+      return newState
+
     default:
       return state;
   }
