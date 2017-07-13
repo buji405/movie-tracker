@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import Header from './Header/Header'
-import MovieCardListContainer from '../containers/movieCardListContainer'
+import { Header } from './Header/Header';
+import MovieCardListContainer from '../containers/movieCardListContainer';
+import loginContainer from '../containers/loginContainer';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 export default class App extends Component {
   constructor() {
@@ -9,10 +12,13 @@ export default class App extends Component {
 
   render() {
     return (
-      <div>
-        <Header />
-        <MovieCardListContainer />
-      </div>
+      <Router>
+        <div>
+          <Header/>
+          <Route path='/login' component={loginContainer} />
+          <MovieCardListContainer />
+        </div>
+      </Router>
     )
   }
 }
