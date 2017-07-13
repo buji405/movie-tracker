@@ -8,11 +8,11 @@ class MovieCardList extends Component {
 
   componentDidMount() {
     this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
+    this.props.fetchUserData('/api/users/')
   }
 
   render() {
     let cards;
-    console.log(this.props.items);
 
     if (this.props.hasErrored) {
       return <p>Sorry Asshole</p>

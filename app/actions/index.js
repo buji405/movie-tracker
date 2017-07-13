@@ -1,12 +1,3 @@
-// export const fetchMovies = () => {
-//   //api call
-//   return {
-//     type: 'FETCH_MOVIES',
-//     moviesArray: fetch(...)
-//   }
-// }
-
-
 export const itemsHasErrored = (bool) => {
   return {
     type: 'ITEMS_HAS_ERRORED',
@@ -28,6 +19,21 @@ export const itemsFetchDataSuccess = (items) => {
   };
 }
 
+export const usersFetchDataSuccess = (user) => {
+  return {
+    type: 'USERS_FETCH_DATA_SUCCESS',
+    user
+  };
+}
+
+export const userLogin = (email, password) => {
+  return {
+    type: 'USER_LOGIN',
+    email,
+    password,
+  };
+}
+
 export const itemsFetchData = (url) => {
   return (dispatch) => {
     dispatch(itemsIsLoading(true));
@@ -35,7 +41,7 @@ export const itemsFetchData = (url) => {
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          throw Error(respose.statusText)
+          throw Error(response.statusText)
         }
 
         dispatch(itemsIsLoading(false))
@@ -51,29 +57,25 @@ export const itemsFetchData = (url) => {
   }
 }
 
+export const usersFetchData = (url, email, password) => {
+  return (dispatch) => {
+    dispatch(itemsIsLoading(true));
 
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
 
-// export const fetchUser = () => {
-//   //api call
-// }
-//
-// export const postUser = (email, password, id) => {
-//   //adding a new user who doesnt have an account, signing up
-//   return {
-//     type: 'POST_USER',
-//     email,
-//     password,
-//     id
-//   }
-// }
-//
-// export const loginUser = (email, password) => {
-//   //logging in someone who already has an account
-//   type: 'LOGIN_USER'
-// }
-//
-// export const addFavorite = () => {
-//   return {
-//     type: 'ADD_FAVORITE'
-//   }
-// }
+        dispatch(itemsIsLoading(false))
+
+        return response
+      })
+      .then((response) => response.json())
+      .then((users) => dispatch(usersFetchDataSuccess(users)))
+      .catch((error) => {
+        dispatch(itemsHasErrored(true))
+        console.log(error, 'error fetching data')
+      })
+  }
+}

@@ -24,3 +24,12 @@ export function items(state = [], action) {
       return state;
   }
 }
+
+export function users(state = [], action) {
+  switch (action.type) {
+    case 'USERS_FETCH_DATA_SUCCESS':
+      return action.user;
+    default:
+      return state;
+  }
+}

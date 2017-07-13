@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
-import {itemsHasErrored, itemsIsLoading, itemsFetchDataSuccess, itemsFetchData} from '../actions';
+import {itemsHasErrored, itemsIsLoading, itemsFetchDataSuccess, itemsFetchData, usersFetchData} from '../actions';
 
 
 const mapStateToProps = (state) => {
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 
   const mapDispatchToProps = (dispatch) => {
     return {
-      fetchData: (url) => dispatch(itemsFetchData(url))
+      fetchData: (url) => dispatch(itemsFetchData(url)),
+      fetchUserData: (url) => dispatch(usersFetchData(url))
     };
   };
 
