@@ -32,25 +32,9 @@ export function users(state = {}, action) {
     case 'USER_LOGIN':
       return  state
     case 'DELETE_USER':
-      
+
       return Object.assign({})
-
-    //   console.log('in the reducer login', state.data, action.email, action.password)
-    //   const newState = state.data.filter(e => (e.email === action.email && e.password === action.password))
-
-      // if (newState.length === 0) {
-      //   console.log('empty state asshole!');
-      // }
-      // return newState
     default:
       return state
   }
 }
-
-// export function loginUser(state = [], action) {
-//   switch (action.type) {
-//
-//     default:
-//       return state
-//   }
-// }
