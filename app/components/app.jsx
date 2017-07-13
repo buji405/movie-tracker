@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Header } from './Header/Header';
+import headerContainer from '../containers/headerContainer';
+import{ Header} from '../components/Header/Header';
 import MovieCardListContainer from '../containers/movieCardListContainer';
 import loginContainer from '../containers/loginContainer';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -14,7 +15,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Header/>
+          <Route path='/' component={headerContainer} />
           <Route path='/login' component={loginContainer} />
           <Route exact path='/'component={MovieCardListContainer} />
         </div>
