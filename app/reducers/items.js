@@ -38,3 +38,16 @@ export function users(state = {}, action) {
       return state
   }
 }
+
+export function errors(state = {}, action) {
+  switch(action.type) {
+    case 'DUPLICATE':
+      return action.error
+    case 'INVALID CREDENTIALS':
+      return action.error
+    case 'SUCCESS':
+      return Object.assign({})
+    default:
+      return state
+  }
+}

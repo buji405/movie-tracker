@@ -52,6 +52,7 @@ export const itemsFetchData = (url) => {
         }
 
         dispatch(itemsIsLoading(false))
+        dispatch(itemsHasErrored(false))
 
         return response
       })
@@ -79,6 +80,7 @@ export const usersFetchData = (url, email, password) => {
         }
 
         dispatch(itemsIsLoading(false))
+        dispatch(itemsHasErrored(false))
 
         return response
       })
@@ -86,10 +88,12 @@ export const usersFetchData = (url, email, password) => {
       .then((users) => {
         console.log(users);
          dispatch(usersFetchDataSuccess(users))
+         dispatch(success('SUCCESS'))
 
       })
       .catch((error) => {
         dispatch(itemsHasErrored(true))
+        dispatch(invalidCredentials('INVALID CREDENTIALS'))
         console.log(error, 'error fetching data')
       })
   }
@@ -110,6 +114,7 @@ export const addUser = (url, email, password, name) => {
         }
 
         dispatch(itemsIsLoading(false))
+        dispatch(itemsHasErrored(false))
 
         return response
       })
@@ -117,11 +122,34 @@ export const addUser = (url, email, password, name) => {
       .then((users) => {
         console.log(users);
          dispatch(usersFetchDataSuccess(users))
-
+         dispatch(success('SUCCESS'))
+         dispatch(usersFetchData('/api/users/', email, password))
       })
+
       .catch((error) => {
+        dispatch(duplicates('DUPLICATE'))
         dispatch(itemsHasErrored(true))
         console.log(error, 'error fetching data')
       })
+  }
+}
+
+export const duplicates = (str) => {
+  return {
+    type: 'DUPLICATE',
+    error: str
+  }
+}
+
+export const invalidCredentials = (str) => {
+  return {
+    type: 'INVALID CREDENTIALS',
+    error: str
+  }
+}
+
+export const success = () => {
+  return {
+    type: 'SUCCESS'
   }
 }
