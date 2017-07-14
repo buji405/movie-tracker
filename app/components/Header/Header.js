@@ -10,8 +10,10 @@ export const Header = (props) => {
                     </NavLink>;
 
   return (
-    <section className="nav-bar">
-      <h1>MovieTracker</h1>
+    <section className="header">
+      <div className="logo">
+        <div className="title">MovieTracker</div>
+      </div>
       <div className='navBar'>
         <NavLink exact to='/' activeClassName='selected'>Home</NavLink>
         <NavLink to='/favorites' activeClassName='selected'>Favorites</NavLink>
