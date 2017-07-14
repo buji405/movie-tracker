@@ -32,7 +32,6 @@ export function users(state = {}, action) {
     case 'USER_LOGIN':
       return  state
     case 'DELETE_USER':
-
       return Object.assign({})
     default:
       return state
