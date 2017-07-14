@@ -37,6 +37,9 @@ export default class Login extends Component {
   }
 
   render() {
+    console.log(this.props.state.errors);
+    const invalid = this.props.state.errors === 'INVALID CREDENTIALS' ? 'Invalid Credentials, please try again': null
+    const duplicate = this.props.state.errors === 'DUPLICATE' ? 'That email is taken, please try again' : null
     const name = <input type="text"
                       placeholder = "name"
                       onChange={(e) => this.setState({name: e.target.value})}/>
@@ -45,6 +48,7 @@ export default class Login extends Component {
     const addUserBtn =<button onClick={(e) => {this.addNewUserBtn(e)}}>Submit New User</button>
     const signInBtn = <button onClick={(e) => {this.signUpUser(e)}}>Sign up here!</button>
     const logOut = <button onClick={(e) => {this.logOut(e)}}>Log Out</button>
+
 
     const signedIn = this.state.signedIn
     return (
@@ -63,6 +67,7 @@ export default class Login extends Component {
                  className="password-input"/>
          {!signedIn ? submitUserBtn : addUserBtn}
          {!signedIn ? signInBtn : null}
+          <p className='invalid'>{invalid || duplicate || null}</p>
         </form>
       </div>
     )
