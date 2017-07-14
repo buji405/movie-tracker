@@ -25,7 +25,7 @@ export default class Login extends Component {
   signUpUser (e) {
     e.preventDefault()
     this.setState({
-      signedIn: true
+      signedIn: !this.state.signedIn
     })
   }
 
@@ -46,7 +46,7 @@ export default class Login extends Component {
 
                     const submitUserBtn = <button onClick={(e) => {this.submitUser(e)}}>Submit</button>
     const addUserBtn =<button onClick={(e) => {this.addNewUserBtn(e)}}>Submit New User</button>
-    const signInBtn = <button onClick={(e) => {this.signUpUser(e)}}>Sign up here!</button>
+    const signInBtn = <button onClick={(e) => {this.signUpUser(e)}}>{this.state.signedIn ? 'Login' : 'Sign up'}</button>
     const logOut = <button onClick={(e) => {this.logOut(e)}}>Log Out</button>
 
 
@@ -66,7 +66,7 @@ export default class Login extends Component {
                  placeholder="password"
                  className="password-input"/>
          {!signedIn ? submitUserBtn : addUserBtn}
-         {!signedIn ? signInBtn : null}
+         {signInBtn}
           <p className='invalid'>{invalid || duplicate || null}</p>
         </form>
       </div>
