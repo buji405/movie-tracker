@@ -86,7 +86,6 @@ export const usersFetchData = (url, email, password) => {
       })
       .then((response) => response.json())
       .then((users) => {
-        console.log(users);
          dispatch(usersFetchDataSuccess(users))
          dispatch(success('SUCCESS'))
 
