@@ -7,7 +7,6 @@ class MovieCardList extends Component {
 
   componentDidMount() {
     this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
-
   }
 
   render() {

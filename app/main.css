@@ -1,14 +1,38 @@
-#main h1 {
-  background-color: blue;
+@font-face {
+  font-family: southAfrican;
+  src: url('../assets/southAfrican2.ttf');
 }
 
-#main {
-  text-align: center;
+html,
+body {
+  margin: 0;
 }
 
-.nav-bar {
-  background: lightgrey;
-  height: 60px;
+/*#main h1 {
+  background-color: #727272;
+}*/
+
+.logo,
+.navBar {
+  background-color: #727272;
+  height: 68px;
+}
+
+.navBar {
+  text-align: right;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.title {
+  color: #fed35c;
+  font-size: 60px;
+  letter-spacing: 2px;  
+  padding-left: 30px;
+  font-family: southAfrican;
 }
 
 form {
@@ -16,20 +40,20 @@ form {
 }
 
 .movies-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  background: yellow;
-  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  justify-content: center;
+  background: #EAB028;
+  padding-top: 20px;
 }
 
 .movie-card {
-  border: 1px solid black;
-
-  /*height: 200px;*/
-  width: 350px;
-  padding: 1%;
-  display: inline-block;
+  display: grid;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px #635637;
 }
 
 .login-form {

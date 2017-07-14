@@ -9,8 +9,10 @@ export const Header = (props, state) => {
 
   const logoutAppear = props.state.users.data ? logoutBtn : null
   return (
-    <section className="nav-bar">
-      <h1>MovieTracker</h1>
+    <section className="header">
+      <div className="logo">
+        <div className="title">MovieTracker</div>
+      </div>
       <div className='navBar'>
         <NavLink exact to='/' activeClassName='selected'>Home</NavLink>
         <NavLink to='/favorites' activeClassName='selected'>Favorites</NavLink>
