@@ -4,7 +4,7 @@ import MovieCard from '../components/MovieCard/MovieCard';
 const mapStateToProps = (state) => {
     return {
       items: state.items
-    };
+    }
   }
 
 
