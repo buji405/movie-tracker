@@ -133,16 +133,36 @@ export const addUser = (url, email, password, name) => {
   }
 }
 
-export const postFavorites = () => {
-  return(dispatch) => {
-    dispatch(itemsIsLoading(true))
+export const postFavorites = (url, user, movie) => {
+  const {id, title, poster_path, release_date, vote_average, overview} = movie
+  const userId = user
+  return (dispatch) => {
 
     fetch(url, {
-      method: POST,
-      body: JSON.stringify()
+      method: 'POST',
+      body: JSON.stringify({movie_id: id, user_id: userId, title, poster_path, release_date, vote_average, overview}),
+      headers: {'Content-Type': 'application/json'}
     })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
+
+        return response
+      })
+      
+      .catch((error) => {
+        dispatch(duplicates('DUPLICATE'))
+        dispatch(itemsHasErrored(true))
+        console.log(error, 'error fetching data')
+      })
   }
 }
+
+
+
+
+
 
 export const duplicates = (str) => {
   return {

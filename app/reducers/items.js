@@ -34,7 +34,7 @@ export function users(state = {}, action) {
     case 'DELETE_USER':
       return Object.assign({})
     case 'ADD_FAVORITE':
-
+      console.log('add favorites local');
       if(!state.data['favorites']) {
         state.data['favorites'] = []
       }
