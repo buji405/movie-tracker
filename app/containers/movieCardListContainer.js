@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
-import { itemsFetchData } from '../actions';
+import { itemsFetchData, favorite } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: (url) => dispatch(itemsFetchData(url))
+    fetchData: (url) => dispatch(itemsFetchData(url)),
+    addFavorite: (data) => dispatch(favorite(data))
   }
 }
 

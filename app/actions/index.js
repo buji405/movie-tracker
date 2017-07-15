@@ -133,6 +133,17 @@ export const addUser = (url, email, password, name) => {
   }
 }
 
+export const postFavorites = () => {
+  return(dispatch) => {
+    dispatch(itemsIsLoading(true))
+
+    fetch(url, {
+      method: POST,
+      body: JSON.stringify()
+    })
+  }
+}
+
 export const duplicates = (str) => {
   return {
     type: 'DUPLICATE',
@@ -152,3 +163,10 @@ export const success = () => {
     type: 'SUCCESS'
   }
 }
+
+  export const favorite = (favorite) => {
+    return {
+      type: 'ADD_FAVORITE',
+      favorite
+    }
+  }
