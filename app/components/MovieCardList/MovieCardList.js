@@ -12,7 +12,7 @@ class MovieCardList extends Component {
   }
 
   render() {
-  
+    console.log(this.props);
     let cards;
 
     if (this.props.hasErrored) {
@@ -28,7 +28,9 @@ class MovieCardList extends Component {
         return (
           <MovieCard data={result}
                      key={index}
-                     addFavorite={this.props.addFavorite}/>
+                     addFavorite={this.props.addFavorite}
+                     postFavorites={this.props.postFavorites}
+                     userId={this.props.user}/>
           );
       });
     }
