@@ -12,7 +12,6 @@ class MovieCardList extends Component {
   }
 
   render() {
-    console.log(this.props);
     let cards;
 
     if (this.props.hasErrored) {
