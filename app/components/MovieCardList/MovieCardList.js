@@ -12,6 +12,7 @@ class MovieCardList extends Component {
   }
 
   render() {
+  
     let cards;
 
     if (this.props.hasErrored) {
@@ -25,8 +26,9 @@ class MovieCardList extends Component {
     if (this.props.items.results) {
       cards = this.props.items.results.map((result, index) => {
         return (
-          <MovieCard poster={result.poster_path}
-                     key={index}/>
+          <MovieCard data={result}
+                     key={index}
+                     addFavorite={this.props.addFavorite}/>
           );
       });
     }

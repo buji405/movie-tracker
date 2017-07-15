@@ -33,6 +33,14 @@ export function users(state = {}, action) {
       return  state
     case 'DELETE_USER':
       return Object.assign({})
+    case 'ADD_FAVORITE':
+
+      if(!state.data['favorites']) {
+        state.data['favorites'] = []
+      }
+      state.data.favorites = [...state.data.favorites, action.favorite]
+      const newState = Object.assign({}, state)
+      return newState
     default:
       return state
   }
@@ -50,3 +58,15 @@ export function errors(state = {}, action) {
       return state
   }
 }
+
+
+
+// export function favorites(state=[], action) {
+//   console.log('reducer', action);
+//   switch(action.type) {
+//     case 'ADD_FAVORITE':
+//       return [...state, action.favorite]
+//     default:
+//       return state
+//   }
+// }
