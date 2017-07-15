@@ -12,7 +12,14 @@ class MovieCardList extends Component {
   }
 
   render() {
+    let displayData;
     let cards;
+
+    if (this.props.user !== {} && this.props.location.pathname == '/favorites') {
+      displayData = this.props.user.data.favorites
+    } else {
+      displayData = this.props.items.results
+    }
 
     if (this.props.hasErrored) {
       return <p>Please refresh Problem loading page</p>
@@ -22,8 +29,8 @@ class MovieCardList extends Component {
       return <p>Loading...</p>
     }
 
-    if (this.props.items.results) {
-      cards = this.props.items.results.map((result, index) => {
+    if (displayData) {
+      cards = displayData.map((result, index) => {
         return (
           <MovieCard data={result}
                      key={index}
