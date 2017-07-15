@@ -176,7 +176,6 @@ export const getUserFavorites = (url) => {
       })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response.data)
         dispatch(favoritesServer(response.data))
       })
 
