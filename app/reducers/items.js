@@ -41,6 +41,13 @@ export function users(state = {}, action) {
       state.data.favorites = [...state.data.favorites, action.favorite]
       const newState = Object.assign({}, state)
       return newState
+    case 'ADD_FAVORITE_SERVER':
+      if(!state.data['favorites']) {
+        state.data['favorites'] = []
+      }
+      state.data.favorites = [...state.data.favorites, ...action.favorite]
+      const stateFromServer = Object.assign({}, state)
+      return stateFromServer
     default:
       return state
   }

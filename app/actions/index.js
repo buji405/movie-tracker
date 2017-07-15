@@ -88,7 +88,12 @@ export const usersFetchData = (url, email, password) => {
       .then((users) => {
          dispatch(usersFetchDataSuccess(users))
          dispatch(success('SUCCESS'))
-
+         return users
+      })
+      .then((user) => {
+        // console.log(user.data.id);
+        const id = user.data.id
+        dispatch(getUserFavorites(`/api/users/${id}/favorites`, id))
       })
       .catch((error) => {
         dispatch(itemsHasErrored(true))
@@ -119,12 +124,11 @@ export const addUser = (url, email, password, name) => {
       })
       .then((response) => response.json())
       .then((users) => {
-        console.log(users);
          dispatch(usersFetchDataSuccess(users))
          dispatch(success('SUCCESS'))
          dispatch(usersFetchData('/api/users/', email, password))
+         return users
       })
-
       .catch((error) => {
         dispatch(duplicates('DUPLICATE'))
         dispatch(itemsHasErrored(true))
@@ -150,7 +154,7 @@ export const postFavorites = (url, user, movie) => {
 
         return response
       })
-      
+
       .catch((error) => {
         dispatch(duplicates('DUPLICATE'))
         dispatch(itemsHasErrored(true))
@@ -159,10 +163,29 @@ export const postFavorites = (url, user, movie) => {
   }
 }
 
+export const getUserFavorites = (url) => {
+  return (dispatch) => {
 
+    fetch(url)
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText)
+        }
 
+        return response
+      })
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response.data)
+        dispatch(favoritesServer(response.data))
+      })
 
-
+      .catch((error) => {
+        dispatch(itemsHasErrored(true))
+        console.log(error, 'error fetching data')
+      })
+  }
+}
 
 export const duplicates = (str) => {
   return {
@@ -187,6 +210,13 @@ export const success = () => {
   export const favorite = (favorite) => {
     return {
       type: 'ADD_FAVORITE',
+      favorite
+    }
+  }
+
+  export const favoritesServer = (favorite) => {
+    return {
+      type: 'ADD_FAVORITE_SERVER',
       favorite
     }
   }
