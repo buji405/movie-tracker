@@ -34,9 +34,11 @@ export function users(state = {}, action) {
     case 'DELETE_USER':
       return Object.assign({})
     case 'ADD_FAVORITE':
-      if(!state.data['favorites']) {
-        state.data['favorites'] = []
+    
+      if (state.data.favorites.indexOf(action.favorite) !== -1) {
+        return state
       }
+      console.log(action.favorite);
       state.data.favorites = [...state.data.favorites, action.favorite]
       const newState = Object.assign({}, state)
       return newState

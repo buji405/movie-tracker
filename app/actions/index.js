@@ -137,10 +137,22 @@ export const addUser = (url, email, password, name) => {
   }
 }
 
-export const postFavorites = (url, user, movie) => {
+export const postFavorites = (url, user, movie, userData) => {
   const {id, title, poster_path, release_date, vote_average, overview} = movie
   const userId = user
+
+
   return (dispatch) => {
+    let favsIds;
+
+    if (userData.data) {
+      favsIds = userData.data.favorites.map(favorite => favorite.id)
+    }
+
+    if (favsIds.includes(movie.id)) {
+
+      return
+    }
 
     fetch(url, {
       method: 'POST',

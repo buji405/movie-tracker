@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
     items: state.items,
     hasErrored: state.itemsHasErrored,
     isLoading: state.itemsIsLoading,
-    user: state.users
+    user: state.users,
   }
 }
 
@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchData: (url) => dispatch(itemsFetchData(url)),
     addFavorite: (data) => dispatch(favorite(data)),
-    postFavorites: (url, user, movie) => dispatch(postFavorites(url, user, movie))
+    postFavorites: (url, user, movie, array) => dispatch(postFavorites(url, user, movie, array))
   }
 }
 

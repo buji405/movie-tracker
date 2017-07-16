@@ -14,7 +14,7 @@ class MovieCardList extends Component {
   render() {
     let displayData;
     let cards;
-
+    
     if (this.props.user !== {} && this.props.location.pathname == '/favorites') {
       displayData = this.props.user.data.favorites
     } else {
@@ -34,6 +34,7 @@ class MovieCardList extends Component {
         return (
           <MovieCard data={result}
                      key={index}
+                     userData={this.props.user}
                      addFavorite={this.props.addFavorite}
                      postFavorites={this.props.postFavorites}
                      userId={this.props.user}/>
