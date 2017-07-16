@@ -9,6 +9,11 @@ export const Header = (props) => {
                              onClick={(e) => { props.handleLogout() }}>
                       Logout
                     </NavLink>;
+  const favoritesBtn = <NavLink className="favorites"
+                                to='/favorites'
+                                activeClassName='selected'>
+                          Favorites
+                        </NavLink>
 
   return (
     <section className="header">
@@ -17,7 +22,7 @@ export const Header = (props) => {
       </div>
       <div className='navBar'>
         <NavLink className="home" exact to='/' activeClassName='selected'>Home</NavLink>
-        <NavLink className="favorites" to='/favorites' activeClassName='selected'>Favorites</NavLink>
+        {data ? favoritesBtn : null}
         <NavLink className="login" to='/login' activeClassName='selected'>Login</NavLink>
         {data ? logoutBtn : null}
       </div>

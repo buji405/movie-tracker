@@ -121,7 +121,6 @@ input,
   overflow: hidden;
   -webkit-animation: typing 2s steps(21, end),
   blink-caret .5s step-end infinite alternate;
-
 }
 
 

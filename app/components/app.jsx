@@ -24,3 +24,7 @@ export default class App extends Component {
     )
   }
 }
+
+
+// <Route exact path='/login' render={props =>
+//   (this.props.userIsAuthenticated ? <Redirect to='/' /> : <LoginContainer location={location} />)} />
