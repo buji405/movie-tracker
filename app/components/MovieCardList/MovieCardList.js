@@ -15,6 +15,7 @@ class MovieCardList extends Component {
     let displayData;
     let cards;
 
+
     if (this.props.user !== {} && this.props.location.pathname == '/favorites') {
       displayData = this.props.user.data.favorites
     } else {
