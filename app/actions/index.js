@@ -148,7 +148,8 @@ export const postFavorites = (url, user, movie, userData) => {
     if (userData.data) {
       favsIds = userData.data.favorites.map(favorite => favorite.id)
     }
-
+    console.log(favsIds);
+    console.log(movie.id);
     if (favsIds.includes(movie.id)) {
 
       return
@@ -168,7 +169,6 @@ export const postFavorites = (url, user, movie, userData) => {
       })
 
       .catch((error) => {
-        dispatch(duplicates('DUPLICATE'))
         dispatch(itemsHasErrored(true))
         console.log(error, 'error fetching data')
       })
@@ -229,5 +229,47 @@ export const success = () => {
     return {
       type: 'ADD_FAVORITE_SERVER',
       favorite
+    }
+  }
+
+  export const deleteFavorite = (favorite) => {
+    return {
+      type: 'DELETE_FAVORITE',
+      favorite
+    }
+  }
+
+  export const deleteFavoriteServer = (user, movie) => {
+
+    return (dispatch) => {
+      let favsIds;
+
+      if (userData.data) {
+        favsIds = userData.data.favorites.map(favorite => favorite.id)
+      }
+
+      if (favsIds.includes(movie.id)) {
+
+        return
+      }
+
+      fetch(`/api/users/${user}/favorites/${movie.id}`, {
+        method: 'POST',
+        body: JSON.stringify({movie_id: id, user_id: userId}),
+        headers: {'Content-Type': 'application/json'}
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+
+          return response
+        })
+
+        .catch((error) => {
+          dispatch(duplicates('DUPLICATE'))
+          dispatch(itemsHasErrored(true))
+          console.log(error, 'error fetching data')
+        })
     }
   }

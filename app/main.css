@@ -3,9 +3,16 @@
   src: url('../assets/southAfrican2.ttf');
 }
 
+@-webkit-keyframes typing { from { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
+
 html,
 body {
   margin: 0;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /*#main h1 {
@@ -20,6 +27,10 @@ body {
 
 .navBar {
   text-align: right;
+  display: inline-block;
+  padding-top: 20px;
+  padding-right: 25px;
+
 }
 
 .header {
@@ -30,7 +41,7 @@ body {
 .title {
   color: #fed35c;
   font-size: 60px;
-  letter-spacing: 2px;  
+  letter-spacing: 2px;
   padding-left: 30px;
   font-family: southAfrican;
 }
@@ -39,7 +50,9 @@ form {
   padding-top: 20px;
 }
 
-.movies-container {
+.movies-container,
+.front,
+.back {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-row-gap: 20px;
@@ -56,6 +69,91 @@ form {
   box-shadow: 5px 5px 5px #635637;
 }
 
-.login-form {
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #EAB028;
+  height: 100vh;
+}
+
+.form-container {
+  width: 500px;
+  border-radius: 3px;
   background-color: #fff;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+input,
+.button {
+  width: 250px;
+  height: 30px;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.button {
+  transition-duration: .2s;
+  border-radius: 3px;
+  border: none;
+  color: #635637;
+}
+
+.button:hover {
+  background: #727272;
+  color: #fed35c;
+  transition-duration: .2s;
+}
+
+.login-scroll {
+  font: bold 300% Consolas, Monaco, monospace;
+  border-right: .1em solid black;
+  width: 16.5em;
+  width: 29ch;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-animation: typing 2s steps(21, end),
+  blink-caret .5s step-end infinite alternate;
+
+}
+
+
+.home,
+.favorites,
+.login,
+.logout {
+  color: #fed35c;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 30px;
+  transition-duration: 0.3s;
+}
+
+.home,
+.favorites,
+.login,
+.message,
+.logout {
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.message {
+  color: #635637;
+}
+
+
+.home:hover,
+.favorites:hover,
+.login:hover,
+.logout:hover {
+  color: #ea8857;
+  transition-duration: 0.3s;
 }
