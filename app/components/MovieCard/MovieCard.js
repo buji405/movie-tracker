@@ -5,12 +5,6 @@ const MovieCard = ({data, addFavorite, postFavorites, userId, userData, pathName
   const url = '/api/users/favorites/new'
   let favsArray;
 
-  // console.log(userData);
-
-
-
-
-
   const updateFavs = <button onClick={(e) => {
       postFavorites(url, userId.data.id, data, userData);
       if (pathName === '/favorites') {
