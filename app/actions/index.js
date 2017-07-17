@@ -27,7 +27,6 @@ export const usersFetchDataSuccess = (user) => {
 }
 
 export const userLogin = (email, password) => {
-  console.log('in userLogin action', email, password);
   return {
     type: 'USER_LOGIN',
     email,
@@ -149,10 +148,7 @@ export const postFavorites = (url, user, movie, userData) => {
       console.log('userdata', userData.data.favorites);
       favsIds = userData.data.favorites.map(favorite => favorite.movie_id)
     }
-    // console.log('movie_id',movie_id);
-    // console.log('movie_id',movie.id);
-    // console.log('favsarray',favsIds);
-    // console.log('movie', movie);
+
     if (favsIds.includes(movie.movie_id)) {
       console.log('delete server triggered');
       console.log('delete', movie_id, userId);
