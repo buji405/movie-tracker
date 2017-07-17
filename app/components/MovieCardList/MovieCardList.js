@@ -13,7 +13,7 @@ class MovieCardList extends Component {
 
   componentDidMount() {
     if (this.props.items.length === 0) {
-      this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
+      this.props.fetchData(`https://api.themoviedb.org/3/movie/now_playing?api_key=${key}&language=en-US&page=1`)
     }
   }
 

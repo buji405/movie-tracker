@@ -1,3 +1,4 @@
+
 import React from 'react';
 import fetchMock from 'fetch-mock';
 import { shallow } from 'enzyme';
@@ -6,7 +7,7 @@ import configureMockStore from 'redux-mock-store'
 
 describe('movie card containers', () => {
   it.skip('renders a container element', () => {
-    
+
     const mockStore = configureMockStore()({
       items: [],
     })

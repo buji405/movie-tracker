@@ -2,6 +2,8 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 export const Header = (props) => {
+  console.log(props);
+  console.log(props.handleLogout);
   let { data } = props.state.users;
   const logoutBtn = <NavLink to='/'
                              activeClassName='selected'
@@ -13,7 +15,12 @@ export const Header = (props) => {
                                 to='/favorites'
                                 activeClassName='selected'>
                           Favorites
-                        </NavLink>
+                      </NavLink>
+
+  const loginBtn = <NavLink className="login" to='/login'
+                            activeClassName='selected'>
+                          Login
+                   </NavLink>;
 
   return (
     <section className="header">
@@ -23,8 +30,7 @@ export const Header = (props) => {
       <div className='navBar'>
         <NavLink className="home" exact to='/' activeClassName='selected'>Home</NavLink>
         {data ? favoritesBtn : null}
-        <NavLink className="login" to='/login' activeClassName='selected'>Login</NavLink>
-        {data ? logoutBtn : null}
+        {data ? logoutBtn : loginBtn}
       </div>
     </section>
   );
