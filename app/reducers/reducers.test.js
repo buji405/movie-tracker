@@ -105,34 +105,77 @@ describe('users reducer', () => {
     expect(reducers.users(state, userAction)).toEqual({"data": {"favorites": [undefined]}})
   })
 
-  it('Add a favorites property if not present', () => {
+  it('Add a favorites to the favorites array', () => {
     const action = {
       type: 'ADD_FAVORITE',
       favorite: ['Greg']
     }
 
-    console.log(action.favorite);
     const state = { data: {favorites: []}}
 
     expect(reducers.users(state, action).data.favorites.length).toEqual(1)
   })
+
+  it('Add favorites from the server', () => {
+    const action = {
+      type: 'ADD_FAVORITE_SERVER',
+      favorite: ['Greg', 'Marty']
+    }
+
+    const state = { data: {favorites: []}}
+
+    expect(reducers.users(state, action).data.favorites.length).toEqual(2)
+  })
+  it('should delete a favorite', () => {
+    const action = {
+      type: 'DELETE_FAVORITE',
+      favorite: {movie_id: 1}
+    }
+
+    const state = { data: {favorites: [
+        {movie_id: 1},
+        {movie_id: 2}
+      ]
+    }}
+    expect(state.data.favorites.length).toEqual(2)
+    expect(reducers.users(state, action).data.favorites.length).toEqual(1)
+  })
 })
 
+describe('errors reducer', () => {
+  it('should handle default to empty object', () => {
+    const action = {
+      type: 'init',
+    }
 
-// const initialAction = { type: 'init' }
-// it('default state is an empty array', () => {
-//
-//   expect(reducers.ideas(undefined, initialAction)).toEqual([]);
-// });
-//
-// it('ADD_IDEA adds an idea to the initial state', () => {
-//   const action = { type: 'ADD_IDEA', idea: {} }
-//
-//   expect(reducers.ideas(undefined, action).length).toEqual(1);
-// });
-//
-// it('default state is an empty array', () => {
-//   const action = { type: 'DELETE_IDEA', id: 1 }
-//
-//   expect(reducers.ideas(undefined, action)).toEqual([]);
-// });
+    expect(reducers.errors(undefined, action)).toEqual({})
+  })
+
+  it('should handle duplicate errors', () => {
+    const action = {
+      type: 'DUPLICATE',
+      error: 'duplication'
+    }
+
+    expect(reducers.errors(undefined, action)).toEqual('duplication')
+  })
+
+  it('should handle invalid credentials', () => {
+    const action = {
+      type: 'INVALID CREDENTIALS',
+      error: 'invalid credentials'
+    }
+
+    expect(reducers.errors(undefined, action)).toEqual('invalid credentials')
+  })
+
+  it('should reset errors on success', () => {
+    const action = {
+      type: 'SUCCESS',
+    }
+
+    const state = 'invalid credentials'
+
+    expect(reducers.errors(state, action)).toEqual({})
+  })
+})
