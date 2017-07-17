@@ -9,11 +9,13 @@
 html,
 body {
   margin: 0;
+
 }
 
 * {
   box-sizing: border-box;
 }
+
 
 /*#main h1 {
   background-color: #727272;
@@ -50,9 +52,7 @@ form {
   padding-top: 20px;
 }
 
-.movies-container,
-.front,
-.back {
+.movies-container {
   display: grid;
   grid-template-columns: repeat(auto-fill, 300px);
   grid-row-gap: 20px;
@@ -155,4 +155,15 @@ input,
 .logout:hover {
   color: #ea8857;
   transition-duration: 0.3s;
+}
+
+.fave-btn {
+  width: 300px;
+  cursor: pointer;
+  background-color: #bcbcbc;
+  border: none;
+  padding: 10px;
+  font-size: 15px;
+  letter-spacing: .5px;
+  font-weight: bold;
 }
