@@ -16,6 +16,19 @@ export function itemsIsLoading(state = false, action) {
   }
 }
 
+export function errors(state = {}, action) {
+  switch(action.type) {
+    case 'DUPLICATE':
+      return action.error
+    case 'INVALID CREDENTIALS':
+      return action.error
+    case 'SUCCESS':
+      return Object.assign({})
+    default:
+      return state
+  }
+}
+
 export function items(state = [], action) {
   switch (action.type) {
     case 'ITEMS_FETCH_DATA_SUCCESS':
@@ -39,6 +52,7 @@ export function users(state = {}, action) {
       if(!state.data['favorites']) {
         state.data['favorites'] = []
       }
+
       state.data.favorites = [...state.data.favorites, action.favorite]
       const newState = Object.assign({}, state)
       return newState
@@ -46,6 +60,7 @@ export function users(state = {}, action) {
       if(!state.data['favorites']) {
         state.data['favorites'] = []
       }
+
       state.data.favorites = [...state.data.favorites, ...action.favorite]
       const stateFromServer = Object.assign({}, state)
       return stateFromServer
@@ -53,21 +68,9 @@ export function users(state = {}, action) {
       const newStateArr = state.data.favorites.filter((fav) => {
         return action.favorite.movie_id !== fav.movie_id
       })
+
       const data = Object.assign({}, state.data, {favorites: newStateArr})
       return Object.assign({}, state, {data})
-    default:
-      return state
-  }
-}
-
-export function errors(state = {}, action) {
-  switch(action.type) {
-    case 'DUPLICATE':
-      return action.error
-    case 'INVALID CREDENTIALS':
-      return action.error
-    case 'SUCCESS':
-      return Object.assign({})
     default:
       return state
   }
