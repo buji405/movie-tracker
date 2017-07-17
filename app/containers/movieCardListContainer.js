@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
-import { itemsFetchData, favorite, postFavorites, deleteFavoriteServer } from '../actions';
+import { itemsFetchData, favorite, postFavorites, deleteFavoriteServer, deleteFavorite } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
     items: state.items,
     hasErrored: state.itemsHasErrored,
     isLoading: state.itemsIsLoading,
-    user: state.users,
+    user: state.users
   }
 }
 
@@ -16,7 +16,8 @@ const mapDispatchToProps = (dispatch) => {
     fetchData: (url) => dispatch(itemsFetchData(url)),
     addFavorite: (data) => dispatch(favorite(data)),
     postFavorites: (url, user, movie, array) => dispatch(postFavorites(url, user, movie, array)),
-    deleteFavoriteServer: (user, movie) => dispatch(deleteFavoriteServer(user, movie))
+    deleteFavoriteServer: (user, movie) => dispatch(deleteFavoriteServer(user, movie)),
+    deleteFavorite: (favorite) => dispatch(deleteFavorite(favorite))
   }
 }
 

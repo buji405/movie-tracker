@@ -19,7 +19,9 @@ export function itemsIsLoading(state = false, action) {
 export function items(state = [], action) {
   switch (action.type) {
     case 'ITEMS_FETCH_DATA_SUCCESS':
-      return action.items;
+      return action.items.results.map(movie => {
+        return Object.assign(movie, {'movie_id':movie.id})
+      });
     default:
       return state;
   }
@@ -34,11 +36,10 @@ export function users(state = {}, action) {
     case 'DELETE_USER':
       return Object.assign({})
     case 'ADD_FAVORITE':
-    
-      if (state.data.favorites.indexOf(action.favorite) !== -1) {
-        return state
+      console.log('add favorites local');
+      if(!state.data['favorites']) {
+        state.data['favorites'] = []
       }
-      console.log(action.favorite);
       state.data.favorites = [...state.data.favorites, action.favorite]
       const newState = Object.assign({}, state)
       return newState
@@ -49,6 +50,15 @@ export function users(state = {}, action) {
       state.data.favorites = [...state.data.favorites, ...action.favorite]
       const stateFromServer = Object.assign({}, state)
       return stateFromServer
+    case 'DELETE_FAVORITE':
+      console.log(state.data)
+      const newStateArr = state.data.favorites.filter((fav) => {
+        console.log(action.favorite.movie_id );
+        return action.favorite.movie_id !== fav.movie_id
+      })
+      const data = Object.assign({}, state.data, {favorites: newStateArr})
+      console.log('in the delete users reducer',data);
+      return Object.assign({}, state, {data})
     default:
       return state
   }

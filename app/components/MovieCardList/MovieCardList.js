@@ -4,11 +4,22 @@ import { itemsFetchData } from '../../actions';
 import { key } from '../../key.js';
 
 class MovieCardList extends Component {
+  constructor() {
+    super()
+    this.state = {
+      refresh: true
+    }
+  }
 
   componentDidMount() {
     if (this.props.items.length === 0) {
       this.props.fetchData(`https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=1`)
     }
+  }
+
+  componentWillReceiveProps(np) {
+    if (JSON.stringify(this.props.user) !== JSON.stringify(np.user))
+    this.setState({refresh: !this.state.refresh})
   }
 
   render() {
@@ -17,9 +28,9 @@ class MovieCardList extends Component {
 
 
     if (this.props.user !== {} && this.props.location.pathname == '/favorites') {
-      displayData = this.props.user.data.favorites
+      displayData = this.props.user.data.favorites ||  []
     } else {
-      displayData = this.props.items.results
+      displayData = this.props.items
     }
 
     if (this.props.hasErrored) {
@@ -39,7 +50,9 @@ class MovieCardList extends Component {
                      addFavorite={this.props.addFavorite}
                      postFavorites={this.props.postFavorites}
                      userId={this.props.user}
-                     deleteFavoriteServer={this.props.deleteFavoriteServer}/>
+                     deleteFavoriteServer={this.props.deleteFavoriteServer}
+                     deleteFavorite={this.props.deleteFavorite}
+                     pathName={this.props.location.pathname}/>
           );
       });
     }
