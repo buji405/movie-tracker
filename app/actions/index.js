@@ -138,7 +138,7 @@ export const addUser = (url, email, password, name) => {
 }
 
 export const postFavorites = (url, user, movie, userData) => {
-  const {id, title, poster_path, release_date, vote_average, overview} = movie
+  const {movie_id, title, poster_path, release_date, vote_average, overview} = movie
   const userId = user
 
 
@@ -146,18 +146,41 @@ export const postFavorites = (url, user, movie, userData) => {
     let favsIds;
 
     if (userData.data) {
-      favsIds = userData.data.favorites.map(favorite => favorite.id)
+      console.log('userdata', userData.data.favorites);
+      favsIds = userData.data.favorites.map(favorite => favorite.movie_id)
     }
-    console.log(favsIds);
-    console.log(movie.id);
-    if (favsIds.includes(movie.id)) {
+    // console.log('movie_id',movie_id);
+    // console.log('movie_id',movie.id);
+    // console.log('favsarray',favsIds);
+    // console.log('movie', movie);
+    if (favsIds.includes(movie.movie_id)) {
+      console.log('delete server triggered');
+      console.log('delete', movie_id, userId);
+      fetch(`/api/users/${userId}/favorites/${movie_id}`, {
+        method: 'DELETE',
+        body: JSON.stringify({movie_id: movie_id, user_id: userId}),
+        headers: {'Content-Type': 'application/json'}
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw Error(response.statusText)
+          }
+          dispatch(deleteFavorite(movie))
 
-      return
-    }
+          return response
+        })
 
+        .catch((error) => {
+          dispatch(itemsHasErrored(true))
+          console.log(error, 'error fetching data')
+        })
+    } else {
+      console.log('post triggered');
+      console.log('post', movie_id, movie.id, userId);
     fetch(url, {
+
       method: 'POST',
-      body: JSON.stringify({movie_id: id, user_id: userId, title, poster_path, release_date, vote_average, overview}),
+      body: JSON.stringify({movie_id: movie_id, user_id: userId, title, poster_path, release_date, vote_average, overview}),
       headers: {'Content-Type': 'application/json'}
     })
       .then((response) => {
@@ -172,6 +195,7 @@ export const postFavorites = (url, user, movie, userData) => {
         dispatch(itemsHasErrored(true))
         console.log(error, 'error fetching data')
       })
+    }
   }
 }
 
@@ -268,7 +292,6 @@ export const success = () => {
 
         .catch((error) => {
           dispatch(duplicates('DUPLICATE'))
-          dispatch(itemsHasErrored(true))
           console.log(error, 'error fetching data')
         })
     }
